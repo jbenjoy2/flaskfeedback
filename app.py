@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import User, db, connect_db
-from forms import RegisterForm
+from forms import RegisterForm, LoginForm
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import Unauthorized
 
@@ -30,12 +30,12 @@ def show_secret():
 
 
 @app.errorhandler(401)
-def show_401_page():
+def show_401_page(error):
     return render_template('401.html'), 401
 
 
 @app.errorhandler(404)
-def show_404_page():
+def show_404_page(error):
     return render_template('404.html')
 
 
@@ -67,8 +67,26 @@ def register_new_user():
     return render_template('register.html', form=form)
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login_user():
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+
+        user = User.authenticate(username, password)
+
+        if user:
+            flash(f"Welcome back, {user.username}!", 'success')
+            session['username'] = user.username
+            return redirect('/secret')
+        else:
+            form.password.errors = ['Invalid username/password']
+    return render_template('login.html', form=form)
+
+
 @app.route('/logout')
 def logout_user():
     session.pop('username')
-    flash('Successfully logged out!', 'primary')
-    return redirect('/')
+    flash('Successfully logged out!', 'info')
+    return redirect('/login')
