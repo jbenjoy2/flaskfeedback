@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from models import User, db, connect_db
+from models import User, Feedback, db, connect_db
 from forms import RegisterForm, LoginForm
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import Unauthorized
@@ -13,8 +13,6 @@ app.config["SECRET_KEY"] = "abc123"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 connect_db(app)
-
-toolbar = DebugToolbarExtension(app)
 
 
 @app.route('/')
