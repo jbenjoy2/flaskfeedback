@@ -19,14 +19,17 @@ toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-    return redirect('/register')
+    return redirect('/login')
 
 
-@app.route('/secret')
-def show_secret():
-    if 'username' not in session:
+@app.route('/users/<username>')
+def show_user_details(username):
+    if 'username' not in session or username != session['username']:
         raise Unauthorized()
-    return render_template('secret.html')
+
+    user = User.query.get_or_404(username)
+
+    return render_template('user.html', user=user)
 
 
 @app.errorhandler(401)
@@ -42,7 +45,7 @@ def show_404_page(error):
 @app.route('/register', methods=['GET', 'POST'])
 def register_new_user():
     if 'username' in session:
-        return redirect('/secret')
+        return redirect(f'/users/{session["username"]}')
 
     form = RegisterForm()
 
@@ -63,12 +66,16 @@ def register_new_user():
         session['username'] = new_user.username
         flash(
             f"Welcome, {new_user.username}! Successfully created your account!", 'success')
-        return redirect('/secret')
+        return redirect(f'/users/{new_user.username}')
     return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
+
+    if 'username' in session:
+        return redirect(f'/users/{session["username"]}')
+
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -79,7 +86,7 @@ def login_user():
         if user:
             flash(f"Welcome back, {user.username}!", 'success')
             session['username'] = user.username
-            return redirect('/secret')
+            return redirect(f'/users/{user.username}')
         else:
             form.password.errors = ['Invalid username/password']
     return render_template('login.html', form=form)

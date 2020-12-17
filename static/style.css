@@ -3,3 +3,7 @@
 		display: none;
 	}
 }
+
+h1.banned {
+	font-family: 'Abril Fatface', cursive;
+}
