@@ -1,3 +1,5 @@
+astroid==2.4.2
+autopep8==1.5.4
 bcrypt==3.1.4
 blinker==1.4
 cffi==1.11.5
@@ -7,12 +9,20 @@ Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.10.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
+isort==5.6.4
 itsdangerous==1.1.0
 Jinja2==2.10
+lazy-object-proxy==1.4.3
 MarkupSafe==1.1.0
+mccabe==0.6.1
 psycopg2==2.7.6.1
+pycodestyle==2.6.0
 pycparser==2.19
-six==1.11.0
+pylint==2.6.0
+six==1.15.0
 SQLAlchemy==1.2.14
+toml==0.10.2
+typed-ast==1.4.1
 Werkzeug==0.14.1
+wrapt==1.12.1
 WTForms==2.2.1
