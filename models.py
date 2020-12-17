@@ -22,6 +22,9 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30))
 
+    feedback = db.relationship(
+        'Feedback', backref='user', cascade="all,delete")
+
     def __repr__(self):
         return f"<User {self.username}: {self.last_name}, {self.first_name}>"
 
@@ -54,5 +57,3 @@ class Feedback(db.Model):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     username = db.Column(db.String(20), db.ForeignKey('users.username'))
-
-    user = db.relationship('User', backref='feedback')
