@@ -2,9 +2,10 @@
 {%block title%}Register{%endblock%}
 
 {% block content %}
-<h1 class="display-1">Register</h1>
-<p class="lead">Register below to view and provide feedback!</p>
-<form method='post'>
+<h1 class="display-1 text-center">Register</h1>
+
+<div class="container"><form method='post'>
+    <p class="lead">Register below to view and provide feedback!</p>
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
         <p>
@@ -15,7 +16,9 @@
             {% endfor %}
         </p>
     {% endfor %}
-    <button class="btn btn-success" type='submit'>Register</button>
+    <button class="btn btn-success btn-block btn-lg" type='submit'>Register</button>
 </form>
+</div>
+
 
 {% endblock %}

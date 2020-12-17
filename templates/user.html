@@ -41,13 +41,13 @@
 <div class="container">
     <div class="row d-flex flex-wrap justify-content-center mt-3">
         {% for feedback in user.feedback%}
-        <div class="col-sm-6 my-2">
+        <div class="col-sm-4 my-2">
             <div class="card bg-sandy">
                 <div class="card-body">
                     <h5 class="card-title">{{feedback.title}}</h5>
                     <p class="card-text">{{feedback.content}}</p>
                 </div>
-                <form action="/feedback/{{feedback.id}}/delete" method="POST">
+                <form style="display:inline" action="/feedback/{{feedback.id}}/delete" method="POST">
                     <button class="btn btn-lg btn-link text-danger"><i class="fas fa-trash"></i></button>
                 </form>
             </div>

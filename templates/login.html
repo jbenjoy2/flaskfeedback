@@ -4,7 +4,7 @@
 {% block content %}
 <h1 class="display-1 text-center">Login</h1>
 <p class="lead text-center">Login below to view and provide feedback!</p>
-<form method='post'>
+<div class="container"><form method='post'>
     {{ form.hidden_tag() }}
     {% for field in form if field.widget.input_type != 'hidden' %}
         <p>
@@ -15,8 +15,10 @@
             {% endfor %}
         </p>
     {% endfor %}
-    <button class="btn btn-success" type='submit'>Login</button>
+    <button class="btn btn-success btn-lg btn-block" type='submit'>Login</button>
 </form>
+</div>
+<br>
 <p class="text-center">No account? <a href="/register">Register here</a></p>
 
 {% endblock %}

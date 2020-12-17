@@ -7,7 +7,12 @@
         <h1 class="text-danger banned">HEY! YOU CAN'T BE HERE!</h1>
         <br>
         <img class="img-fluid" src="https://i.giphy.com/media/xT9KVuimKtly3zoJ0Y/giphy.webp">
-        <p class="pt-5">You do not have permission to view this page. Please <a href="/register">register</a> or <a href="/login">login</a></p>
+        <p class="pt-5">You do not have permission to view this page. To View this page, </p>
+        {% if session['username'] %}
+        <p>please <a href="/logout">log out</a> and log in again as the desired user.</p>
+        {% else %}
+        <p>please <a href="/register">register</a> or <a href="/login">login</a></p>
+        {% endif %}
     <a href="/"><i class="fas fa-home fa-5x"></i></a>
     </div>
     
