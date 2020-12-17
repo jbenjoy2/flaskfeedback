@@ -7,3 +7,17 @@
 h1.banned {
 	font-family: 'Abril Fatface', cursive;
 }
+
+a.purplebutton {
+	background-color: rgb(91, 28, 230);
+	color: white;
+}
+a.purplebutton:hover {
+	background: rgb(56, 3, 201);
+	color: white;
+	border: 1px solid rgb(98, 37, 230);
+}
+
+div.bg-sandy {
+	background-color: sandybrown;
+}

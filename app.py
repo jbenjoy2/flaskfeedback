@@ -20,16 +20,6 @@ def home_page():
     return redirect('/login')
 
 
-@app.route('/users/<username>')
-def show_user_details(username):
-    if 'username' not in session or username != session['username']:
-        raise Unauthorized()
-
-    user = User.query.get_or_404(username)
-
-    return render_template('user.html', user=user)
-
-
 @app.errorhandler(401)
 def show_401_page(error):
     return render_template('401.html'), 401
@@ -95,3 +85,35 @@ def logout_user():
     session.pop('username')
     flash('Successfully logged out!', 'info')
     return redirect('/login')
+
+
+@app.route('/users/<username>')
+def show_user_details(username):
+    if 'username' not in session or username != session['username']:
+        raise Unauthorized()
+
+    user = User.query.get_or_404(username)
+
+    return render_template('user.html', user=user)
+
+
+@app.route('/users/<username>/feedback/add', methods=['GET', 'POST'])
+def add_feedback(username):
+    if 'username' not in session or username != session['username']:
+        raise Unauthorized()
+
+    form = FeedbackForm()
+
+    if form.validate_on_submit():
+        title = form.title.data
+        content = form.content.data
+
+        feedback = Feedback(title=title, content=content, username=username)
+
+        db.session.add(feedback)
+        db.session.commit()
+        flash('New Feedback Added!', 'success')
+        return redirect(f'/users/{feedback.username}')
+
+    else:
+        return render_template('feedback/addfeedback.html', form=form)
