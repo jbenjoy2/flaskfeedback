@@ -129,3 +129,29 @@ def delete_feedback(feedback_id):
     db.session.commit()
 
     return redirect(f'/users/{feedback.username}')
+
+
+@app.route('/users/<username>/confirm-delete')
+def display_confirmation_page(username):
+    if 'username' not in session or username != session['username']:
+        raise Unauthorized()
+
+    user = User.query.get_or_404(username)
+
+    return render_template('confirm.html', user=user)
+
+
+@app.route('/users/<username>/delete', methods=['POST'])
+def delete_user(username):
+    if 'username' not in session or username != session['username']:
+        raise Unauthorized()
+
+    user = User.query.get_or_404(username)
+    if user.username == session['username']:
+        db.session.delete(user)
+        db.session.commit()
+        session.pop('username')
+        flash('Account Successfully Deleted', 'danger')
+        return redirect('/')
+    flash("You don't have permission to do that!", 'danger')
+    return redirect('/')

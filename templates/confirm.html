@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Are you sure?{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="row justify-content-center align-items-center mx-0" style="width: 1000px; height: 1000px;">
+        <div style="width: 800px; height: 400px;">
+            <h1 class="text-danger">Are you sure you want to delete your account? (This cannot be undone)</h1>
+            <hr style="background:white">
+            <form action="/users/{{user.username}}/delete" method="post">
+                <a href="/" class="btn btn-warning mx-5">NOPE NOPE NOPE GET ME OUTTA HERE</a>
+                <button class="btn btn-success mx-5">Yes Please Delete Me</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

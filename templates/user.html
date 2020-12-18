@@ -59,6 +59,8 @@
 {% endif %}
 <br>
 <div class="container text-center">
-    <a class="btn btn-lg purplebutton" href="/users/{{user.username}}/feedback/add">Add Your Feedback!</a>
+    <a class="btn btn-lg purplebutton mx-3" href="/users/{{user.username}}/feedback/add">Add Your Feedback!</a>
+    <a class="btn btn-danger btn-lg mx-3" href="/users/{{user.username}}/confirm-delete">Delete Account</a>
 </div>
 {% endblock %}
+
