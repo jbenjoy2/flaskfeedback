@@ -77,7 +77,7 @@ def login_user():
             session['username'] = user.username
             return redirect(f'/users/{user.username}')
         else:
-            form.password.errors = ['Invalid username/password']
+            form.password.errors = ['Incorrect password. Please try again']
     return render_template('login.html', form=form)
 
 
