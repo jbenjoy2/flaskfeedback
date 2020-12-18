@@ -47,9 +47,12 @@
                     <h5 class="card-title">{{feedback.title}}</h5>
                     <p class="card-text">{{feedback.content}}</p>
                 </div>
-                <form style="display:inline" action="/feedback/{{feedback.id}}/delete" method="POST">
-                    <button class="btn btn-lg btn-link text-danger"><i class="fas fa-trash"></i></button>
-                </form>
+                <div class="card-footer" style="background:none">
+                    <form style="display:inline" action="/feedback/{{feedback.id}}/delete" method="POST">
+                        <a href="/feedback/{{feedback.id}}/update" class="btn btn-info">Update</a>
+                        <button class="btn btn-lg btn-link text-danger"><i class="fas fa-trash"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -59,7 +62,7 @@
 {% endif %}
 <br>
 <div class="container text-center">
-    <a class="btn btn-lg purplebutton mx-3" href="/users/{{user.username}}/feedback/add">Add Your Feedback!</a>
+    <a class="btn btn-lg purplebutton mx-3" href="/users/{{user.username}}/feedback/add">Add Your Feedback</a>
     <a class="btn btn-danger btn-lg mx-3" href="/users/{{user.username}}/confirm-delete">Delete Account</a>
 </div>
 {% endblock %}

@@ -131,6 +131,17 @@ def delete_feedback(feedback_id):
     return redirect(f'/users/{feedback.username}')
 
 
+@app.route('/feedback/<int:feedback_id>/update', methods=['POST'])
+def update_feedback(feedback_id):
+    feedback = Feedback.query.get_or_404(feedback_id)
+    if 'username' not in session or feedback.username != session['username']:
+        raise Unauthorized()
+
+    form = FeedbackForm(obj=feedback)
+
+    return redirect(f'/users/{feedback.username}')
+
+
 @app.route('/users/<username>/confirm-delete')
 def display_confirmation_page(username):
     if 'username' not in session or username != session['username']:
