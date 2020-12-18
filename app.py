@@ -116,7 +116,7 @@ def add_feedback(username):
         return redirect(f'/users/{feedback.username}')
 
     else:
-        return render_template('feedback/addfeedback.html', form=form)
+        return render_template('addfeedback.html', form=form)
 
 
 @app.route('/feedback/<int:feedback_id>/delete', methods=['POST'])
@@ -145,7 +145,7 @@ def update_feedback(feedback_id):
         db.session.commit()
         flash('Feedback successfully updated!', 'success')
         return redirect(f'/users/{feedback.username}')
-    return render_template('feedback/editfeedback.html', form=form, feedback=feedback)
+    return render_template('editfeedback.html', form=form, feedback=feedback)
 
 
 @app.route('/users/<username>/confirm-delete')
