@@ -47,6 +47,8 @@ class User(db.Model):
         if u and bcrypt.check_password_hash(u.password, pwd):
             # return user instance
             return u
+        elif not u:
+            return 'failed'
         else:
             return False
 

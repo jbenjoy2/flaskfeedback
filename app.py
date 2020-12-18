@@ -70,8 +70,9 @@ def login_user():
         password = form.password.data
 
         user = User.authenticate(username, password)
-
-        if user:
+        if user == 'failed':
+            form.username.errors = ["User not found"]
+        elif user:
             flash(f"Welcome back, {user.username}!", 'success')
             session['username'] = user.username
             return redirect(f'/users/{user.username}')
