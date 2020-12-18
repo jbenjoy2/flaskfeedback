@@ -21,3 +21,8 @@ a.purplebutton:hover {
 div.bg-sandy {
 	background-color: sandybrown;
 }
+
+div.bg-bluepurple {
+	background-color: blueviolet;
+	margin: 0px;
+}
