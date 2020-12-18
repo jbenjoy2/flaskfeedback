@@ -43,3 +43,7 @@ div.bg-bluepurple {
 	height: 1.5rem; /* Footer height */
 	margin-top: 50px;
 }
+
+.modal-backdrop {
+	opacity: 0.78 !important;
+}
