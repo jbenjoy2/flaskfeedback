@@ -90,17 +90,23 @@ def logout_user():
 
 @app.route('/users/<username>')
 def show_user_details(username):
-    if 'username' not in session or username != session['username']:
+    user = User.query.get(username)
+
+    if not user:
+        return render_template('404.html')
+    elif 'username' not in session or session['username'] != username:
         raise Unauthorized()
-
-    user = User.query.get_or_404(username)
-
     return render_template('user.html', user=user)
 
 
 @app.route('/users/<username>/feedback/add', methods=['GET', 'POST'])
 def add_feedback(username):
-    if 'username' not in session or username != session['username']:
+    user = User.query.get(username)
+
+    if not user:
+        flash('That user does not exist!', 'danger')
+        return render_template('404.html')
+    elif 'username' not in session or session['username'] != username:
         raise Unauthorized()
 
     form = FeedbackForm()

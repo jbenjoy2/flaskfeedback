@@ -37,11 +37,11 @@
 <br>
 <hr style="background-color:white">
 {% if user.feedback %}
-<h2>Feedback Snippets</h2>
+<h2 class="mx-3">Feedback Snippets</h2>
 <div class="container">
     <div class="row d-flex flex-wrap justify-content-center mt-3">
         {% for feedback in user.feedback%}
-        <div class="col-sm-4 my-2">
+        <div class="col-sm-10 col-md-8 col-lg-6 my-2">
             <div class="card bg-sandy">
                 <div class="card-body">
                     <h5 class="card-title">{{feedback.title}}</h5>
